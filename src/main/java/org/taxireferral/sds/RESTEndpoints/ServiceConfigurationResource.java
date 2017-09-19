@@ -60,7 +60,7 @@ public class ServiceConfigurationResource {
 		ServiceConfigEndpoint endPoint =
 				shopDAO.getServices(null,null,null,"'" + serviceURL + "'",
 						null,null,
-						null,null,null,null,null);
+						null,false,null,null,null);
 
 
 		String oldImageID = "";
@@ -289,11 +289,11 @@ public class ServiceConfigurationResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getServicesListSimple(
 			@QueryParam("latCenter")Double latCenter, @QueryParam("lonCenter")Double lonCenter,
-			@QueryParam("proximity")Double proximity,
 			@QueryParam("ServiceURL") String serviceURL,
 			@QueryParam("SearchString") String searchString,
 			@QueryParam("IsOfficial") Boolean isOfficial,@QueryParam("IsVerified")Boolean isVerified,
 			@QueryParam("ServiceType") Integer serviceType,
+			@QueryParam("FilterByVisibility") boolean filterByVisibility,
 			@QueryParam("SortBy") String sortBy,
 			@QueryParam("Limit") Integer limit, @QueryParam("Offset") int offset
 	)
@@ -320,10 +320,10 @@ public class ServiceConfigurationResource {
 
 		ServiceConfigEndpoint endPoint = shopDAO.getServices(
 									latCenter,lonCenter,
-									proximity,
 									serviceURL,searchString,
 									isOfficial,isVerified,
 									serviceType,
+									filterByVisibility,
 									sortBy,limit,offset);
 
 

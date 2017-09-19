@@ -403,10 +403,10 @@ public class ServiceConfigurationDAO {
 
     public ServiceConfigEndpoint getServices(
             Double latCenter, Double lonCenter,
-            Double proximity,
             String serviceURL, String searchString,
             Boolean isOfficial, Boolean isVerified,
             Integer serviceType,
+            boolean filterByVisibility,
             String sortBy,
             Integer limit, Integer offset
     )
@@ -466,7 +466,7 @@ public class ServiceConfigurationDAO {
 
 
         // Visibility Filter : Apply
-        if(latCenter != null && lonCenter != null)
+        if(filterByVisibility && latCenter != null && lonCenter != null)
         {
 
             String queryPartlatLonCenter = "";
@@ -487,35 +487,35 @@ public class ServiceConfigurationDAO {
 
 
 
-        // Proximity Filter
-        if(proximity != null)
-        {
-            // proximity > 0 && (deliveryRangeMax==0 || (deliveryRangeMax > 0 && proximity <= deliveryRangeMax))
-
-            String queryPartProximity = "";
-//			String queryPartProximityTwo = "";
-
-
-            // filter using Haversine formula using SQL math functions
-            queryPartProximity = queryPartProximity
-                    + " (6371.01 * acos(cos( radians(" + latCenter + ")) * cos( radians(" + ServiceConfigurationGlobal.LAT_CENTER + " )) * cos(radians( "
-                    + ServiceConfigurationGlobal.LON_CENTER + ") - radians(" + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians("
-                    + ServiceConfigurationGlobal.LAT_CENTER + ")))) <= " + proximity ;
-
-
-            if(isFirst)
-            {
-                queryNormal = queryNormal + " WHERE " + queryPartProximity;
-
-                // reset the flag
-                isFirst = false;
-
-            }else
-            {
-                queryNormal = queryNormal + " AND " + queryPartProximity;
-            }
-
-        }
+//        // Proximity Filter
+//        if(proximity != null)
+//        {
+//            // proximity > 0 && (deliveryRangeMax==0 || (deliveryRangeMax > 0 && proximity <= deliveryRangeMax))
+//
+//            String queryPartProximity = "";
+////			String queryPartProximityTwo = "";
+//
+//
+//            // filter using Haversine formula using SQL math functions
+//            queryPartProximity = queryPartProximity
+//                    + " (6371.01 * acos(cos( radians(" + latCenter + ")) * cos( radians(" + ServiceConfigurationGlobal.LAT_CENTER + " )) * cos(radians( "
+//                    + ServiceConfigurationGlobal.LON_CENTER + ") - radians(" + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians("
+//                    + ServiceConfigurationGlobal.LAT_CENTER + ")))) <= " + proximity ;
+//
+//
+//            if(isFirst)
+//            {
+//                queryNormal = queryNormal + " WHERE " + queryPartProximity;
+//
+//                // reset the flag
+//                isFirst = false;
+//
+//            }else
+//            {
+//                queryNormal = queryNormal + " AND " + queryPartProximity;
+//            }
+//
+//        }
 
 
         if(isOfficial!=null)
