@@ -58,9 +58,10 @@ public class ServiceConfigurationResource {
 
 
 		ServiceConfigEndpoint endPoint =
-				shopDAO.getServices(null,null,null,"'" + serviceURL + "'",
+				shopDAO.getServices(null,null,"'" + serviceURL + "'",null,
 						null,null,
 						null,false,null,null,null);
+
 
 
 		String oldImageID = "";
@@ -278,7 +279,6 @@ public class ServiceConfigurationResource {
 
 		return null;
 	}
-
 
 
 
