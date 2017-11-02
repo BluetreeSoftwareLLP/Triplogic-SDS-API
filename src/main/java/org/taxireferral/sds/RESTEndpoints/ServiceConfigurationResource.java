@@ -9,8 +9,7 @@ import org.taxireferral.sds.Globals.GlobalConstants;
 import org.taxireferral.sds.Globals.Globals;
 import org.taxireferral.sds.ModelEndpoints.ServiceConfigEndpoint;
 import org.taxireferral.sds.ModelRoles.Image;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationGlobal;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationLocal;
+import org.taxireferral.sds.ModelSettings.ServiceConfiguration;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
@@ -45,11 +44,11 @@ public class ServiceConfigurationResource {
 		boolean isUpdated = false;
 		int rowCountUpdated = -1;
 
-		ServiceConfigurationLocal serviceConfigurationLocal = null;
+		ServiceConfiguration serviceConfiguration = null;
 
 		try {
 
-			serviceConfigurationLocal = fetchServiceConfiguration(serviceURL);
+			serviceConfiguration = fetchServiceConfiguration(serviceURL);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,8 +73,8 @@ public class ServiceConfigurationResource {
 			oldImageID = endPoint.getResults().get(0).getLogoImagePath();
 		}
 
-		if (serviceConfigurationLocal != null) {
-			newImageID = serviceConfigurationLocal.getLogoImagePath();
+		if (serviceConfiguration != null) {
+			newImageID = serviceConfiguration.getLogoImagePath();
 		}
 
 
@@ -84,7 +83,7 @@ public class ServiceConfigurationResource {
 			// already exist: Make an Update Call
 //			shopDAO.updateServiceByStaff(endPoint.getResults().get(0));
 
-			if(serviceConfigurationLocal !=null) {
+			if(serviceConfiguration !=null) {
 
 				// check image changed
 
@@ -95,9 +94,11 @@ public class ServiceConfigurationResource {
 
 					// image has Changed
 					newImageIDUploaded = saveNewImage(serviceURL, newImageID);
-					serviceConfigurationLocal.setLogoImagePath(newImageIDUploaded);
+					serviceConfiguration.setLogoImagePath(newImageIDUploaded);
+					serviceConfiguration.setServiceURL(serviceURL);
 
-					rowCountUpdated = shopDAO.updateServiceConfig(Globals.localToGlobal(serviceConfigurationLocal, serviceURL));
+//				Globals.localToGlobal(serviceConfigurationLocal, serviceURL)
+					rowCountUpdated = shopDAO.updateServiceConfig(serviceConfiguration);
 					isUpdated = true;
 
 
@@ -137,12 +138,15 @@ public class ServiceConfigurationResource {
 		{
 			// does not exist: Make an Insert Call
 
-			if(serviceConfigurationLocal !=null)
+			if(serviceConfiguration !=null)
 			{
 
 				newImageIDUploaded = saveNewImage(serviceURL, newImageID);
-				serviceConfigurationLocal.setLogoImagePath(newImageIDUploaded);
-				idOfInsertedRow = shopDAO.insertServiceConfig(Globals.localToGlobal(serviceConfigurationLocal,serviceURL));
+				serviceConfiguration.setLogoImagePath(newImageIDUploaded);
+				serviceConfiguration.setServiceURL(serviceURL);
+				idOfInsertedRow = shopDAO.insertServiceConfig(serviceConfiguration);
+
+//				Globals.localToGlobal(serviceConfigurationLocal,serviceURL)
 			}
 		}
 
@@ -176,7 +180,7 @@ public class ServiceConfigurationResource {
 			{
 				return Response.status(Status.CREATED)
 						.location(URI.create("/api/ServiceConfiguration/" + idOfInsertedRow))
-						.entity(serviceConfigurationLocal)
+						.entity(serviceConfiguration)
 						.build();
 
 			}else if(idOfInsertedRow <= 0)
@@ -195,7 +199,7 @@ public class ServiceConfigurationResource {
 
 
 
-	private ServiceConfigurationLocal fetchServiceConfiguration(String serviceURL) throws Exception
+	private ServiceConfiguration fetchServiceConfiguration(String serviceURL) throws Exception
 	{
 		serviceURL = serviceURL + "/api/v1/ServiceConfiguration";
 
@@ -210,7 +214,7 @@ public class ServiceConfigurationResource {
 		Gson gson = new Gson();
 
 		if (response != null) {
-			return gson.fromJson(response.body().string(),ServiceConfigurationLocal.class);
+			return gson.fromJson(response.body().string(),ServiceConfiguration.class);
 		}
 		else
 		{
@@ -225,13 +229,13 @@ public class ServiceConfigurationResource {
 	@Path("/UpdateByStaff/{ServiceID}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@RolesAllowed({GlobalConstants.ROLE_ADMIN})
-	public Response updateServiceByStaff(ServiceConfigurationGlobal serviceConfigurationGlobal,
+	public Response updateServiceByStaff(ServiceConfiguration serviceConfiguration,
 										 @PathParam("ServiceID")int serviceID)
 	{
 
-		serviceConfigurationGlobal.setServiceID(serviceID);
+		serviceConfiguration.setServiceID(serviceID);
 
-		int rowCount = shopDAO.updateServiceConfigByStaff(serviceConfigurationGlobal);
+		int rowCount = shopDAO.updateServiceConfigByStaff(serviceConfiguration);
 
 		if(rowCount >= 1)
 		{
@@ -544,6 +548,7 @@ public class ServiceConfigurationResource {
 				.entity(image)
 				.build();
 	}
+
 
 
 

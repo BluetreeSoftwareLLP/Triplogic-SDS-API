@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by sumeet on 19/6/16.
  */
-public class ServiceConfigurationGlobal {
+public class ServiceConfiguration {
 
 
     // Table Name
@@ -64,46 +64,82 @@ public class ServiceConfigurationGlobal {
 
     // Create Table Statement
     public static final String createTablePostgres
-            = "CREATE TABLE IF NOT EXISTS " + ServiceConfigurationGlobal.TABLE_NAME + "("
+            = "CREATE TABLE IF NOT EXISTS " + ServiceConfiguration.TABLE_NAME + "("
 
-            + " " + ServiceConfigurationGlobal.SERVICE_CONFIGURATION_ID + " SERIAL PRIMARY KEY,"
+            + " " + ServiceConfiguration.SERVICE_CONFIGURATION_ID + " SERIAL PRIMARY KEY,"
 
 //            + " " + ServiceConfigurationLocal.IMAGE_PATH + " text,"
-            + " " + ServiceConfigurationGlobal.LOGO_IMAGE_PATH + " text,"
-            + " " + ServiceConfigurationGlobal.BACKDROP_IMAGE_PATH + " text,"
+            + " " + ServiceConfiguration.LOGO_IMAGE_PATH + " text,"
+            + " " + ServiceConfiguration.BACKDROP_IMAGE_PATH + " text,"
 
-            + " " + ServiceConfigurationGlobal.SERVICE_NAME + " text,"
-            + " " + ServiceConfigurationGlobal.HELPLINE_NUMBER + " text,"
+            + " " + ServiceConfiguration.SERVICE_NAME + " text,"
+            + " " + ServiceConfiguration.HELPLINE_NUMBER + " text,"
 
-            + " " + ServiceConfigurationGlobal.DESCRIPTION_SHORT + " text,"
-            + " " + ServiceConfigurationGlobal.DESCRIPTION_LONG + " text,"
+            + " " + ServiceConfiguration.DESCRIPTION_SHORT + " text,"
+            + " " + ServiceConfiguration.DESCRIPTION_LONG + " text,"
 
-            + " " + ServiceConfigurationGlobal.ADDRESS + " text,"
-            + " " + ServiceConfigurationGlobal.CITY + " text,"
-            + " " + ServiceConfigurationGlobal.PINCODE + " BIGINT,"
-            + " " + ServiceConfigurationGlobal.LANDMARK + " text,"
-            + " " + ServiceConfigurationGlobal.STATE + " text,"
-            + " " + ServiceConfigurationGlobal.COUNTRY + " text,"
+            + " " + ServiceConfiguration.ADDRESS + " text,"
+            + " " + ServiceConfiguration.CITY + " text,"
+            + " " + ServiceConfiguration.PINCODE + " BIGINT,"
+            + " " + ServiceConfiguration.LANDMARK + " text,"
+            + " " + ServiceConfiguration.STATE + " text,"
+            + " " + ServiceConfiguration.COUNTRY + " text,"
 
-            + " " + ServiceConfigurationGlobal.ISO_COUNTRY_CODE + " text,"
-            + " " + ServiceConfigurationGlobal.ISO_LANGUAGE_CODE + " text,"
-            + " " + ServiceConfigurationGlobal.ISO_CURRENCY_CODE + " text,"
+            + " " + ServiceConfiguration.ISO_COUNTRY_CODE + " text,"
+            + " " + ServiceConfiguration.ISO_LANGUAGE_CODE + " text,"
+            + " " + ServiceConfiguration.ISO_CURRENCY_CODE + " text,"
 
-            + " " + ServiceConfigurationGlobal.SERVICE_TYPE + " INT,"
-//            + " " + ServiceConfigurationGlobal.SERVICE_LEVEL + " INT,"
+            + " " + ServiceConfiguration.SERVICE_TYPE + " INT,"
+//            + " " + ServiceConfiguration.SERVICE_LEVEL + " INT,"
 
-            + " " + ServiceConfigurationGlobal.LAT_CENTER + " FLOAT,"
-            + " " + ServiceConfigurationGlobal.LON_CENTER + " FLOAT,"
-            + " " + ServiceConfigurationGlobal.SERVICE_RANGE + " FLOAT,"
+            + " " + ServiceConfiguration.LAT_CENTER + " FLOAT,"
+            + " " + ServiceConfiguration.LON_CENTER + " FLOAT,"
+            + " " + ServiceConfiguration.SERVICE_RANGE + " FLOAT,"
 
-            + " " + ServiceConfigurationGlobal.IS_OFFICIAL_SERVICE_PROVIDER + " boolean,"
-            + " " + ServiceConfigurationGlobal.IS_VERIFIED + " boolean,"
-            + " " + ServiceConfigurationGlobal.AVAILABLE_ON_PLAYSTORE + " boolean NOT NULL default 'f',"
-            + " " + ServiceConfigurationGlobal.SERVICE_URL + " text UNIQUE NOT NULL,"
+            + " " + ServiceConfiguration.IS_OFFICIAL_SERVICE_PROVIDER + " boolean,"
+            + " " + ServiceConfiguration.IS_VERIFIED + " boolean,"
+            + " " + ServiceConfiguration.AVAILABLE_ON_PLAYSTORE + " boolean NOT NULL default 'f',"
+            + " " + ServiceConfiguration.SERVICE_URL + " text UNIQUE NOT NULL,"
 
-            + " " + ServiceConfigurationGlobal.UPDATED + " timestamp with time zone,"
-            + " " + ServiceConfigurationGlobal.CREATED + " timestamp with time zone NOT NULL DEFAULT now()"
+            + " " + ServiceConfiguration.UPDATED + " timestamp with time zone,"
+            + " " + ServiceConfiguration.CREATED + " timestamp with time zone NOT NULL DEFAULT now()"
             + ")";
+
+
+
+
+
+    public static ServiceConfiguration getDefaultConfig()
+    {
+        ServiceConfiguration serviceConfig = new ServiceConfiguration();
+
+        serviceConfig.setServiceID(1);
+        serviceConfig.setServiceName("Service name not set !");
+        serviceConfig.setHelplineNumber("0-0000-0000");
+        serviceConfig.setDescriptionShort("Short Description not provided.");
+        serviceConfig.setDescriptionLong("long description not provided.");
+        serviceConfig.setAddress("address");
+        serviceConfig.setCity("city");
+        serviceConfig.setPincode(123456l);
+        serviceConfig.setLandmark("landmark");
+        serviceConfig.setState("state");
+        serviceConfig.setCountry("country");
+
+        serviceConfig.setISOCountryCode("country code not provided");
+        serviceConfig.setISOCurrencyCode("currency code not provided");
+        serviceConfig.setISOLanguageCode("language code not provided");
+
+        serviceConfig.setLatCenter(17.5343);
+        serviceConfig.setLonCenter(78.3432);
+        serviceConfig.setServiceRange(234);
+
+
+        return serviceConfig;
+    }
+
+
+
+
 
 
 

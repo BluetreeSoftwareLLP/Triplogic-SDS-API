@@ -7,18 +7,14 @@ import org.taxireferral.sds.DAORoles.DAOUserNew;
 import org.taxireferral.sds.DAORoles.DAOUserSignUp;
 import org.taxireferral.sds.DAOs.ServiceConfigurationDAO;
 import org.taxireferral.sds.JDBCContract;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationGlobal;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationLocal;
+import org.taxireferral.sds.ModelSettings.ServiceConfiguration;
 
-import javax.ws.rs.core.MediaType;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by sumeet on 22/3/17.
@@ -146,44 +142,44 @@ public class Globals {
 
 
 
-
-    public static ServiceConfigurationGlobal localToGlobal(ServiceConfigurationLocal serviceConfigurationLocalLocal, String serviceURL)
-    {
-        ServiceConfigurationGlobal serviceConfigurationGlobal  = new ServiceConfigurationGlobal();
-
-        serviceConfigurationGlobal.setServiceID(serviceConfigurationLocalLocal.getServiceID());
-        serviceConfigurationGlobal.setLogoImagePath(serviceConfigurationLocalLocal.getLogoImagePath());
-        serviceConfigurationGlobal.setBackdropImagePath(serviceConfigurationLocalLocal.getBackdropImagePath());
-
-        serviceConfigurationGlobal.setServiceName(serviceConfigurationLocalLocal.getServiceName());
-        serviceConfigurationGlobal.setHelplineNumber(serviceConfigurationLocalLocal.getHelplineNumber());
-        serviceConfigurationGlobal.setDescriptionShort(serviceConfigurationLocalLocal.getDescriptionShort());
-        serviceConfigurationGlobal.setDescriptionLong(serviceConfigurationLocalLocal.getDescriptionLong());
-
-        serviceConfigurationGlobal.setAddress(serviceConfigurationLocalLocal.getAddress());
-        serviceConfigurationGlobal.setCity(serviceConfigurationLocalLocal.getCity());
-        serviceConfigurationGlobal.setPincode(serviceConfigurationLocalLocal.getPincode());
-        serviceConfigurationGlobal.setLandmark(serviceConfigurationLocalLocal.getLandmark());
-        serviceConfigurationGlobal.setState(serviceConfigurationLocalLocal.getState());
-        serviceConfigurationGlobal.setCountry(serviceConfigurationLocalLocal.getCountry());
-
-        serviceConfigurationGlobal.setISOCountryCode(serviceConfigurationLocalLocal.getISOCountryCode());
-        serviceConfigurationGlobal.setISOLanguageCode(serviceConfigurationLocalLocal.getISOLanguageCode());
-        serviceConfigurationGlobal.setISOCurrencyCode(serviceConfigurationLocalLocal.getISOCurrencyCode());
-
-        serviceConfigurationGlobal.setServiceType(serviceConfigurationLocalLocal.getServiceType());
-
-        serviceConfigurationGlobal.setLatCenter(serviceConfigurationLocalLocal.getLatCenter());
-        serviceConfigurationGlobal.setLonCenter(serviceConfigurationLocalLocal.getLonCenter());
-        serviceConfigurationGlobal.setServiceRange(serviceConfigurationLocalLocal.getServiceRange());
-
-        serviceConfigurationGlobal.setUpdated(serviceConfigurationLocalLocal.getUpdated());
-        serviceConfigurationGlobal.setCreated(serviceConfigurationLocalLocal.getCreated());
-
-        serviceConfigurationGlobal.setServiceURL(serviceURL);
-
-        return serviceConfigurationGlobal;
-    }
+//
+//    public static ServiceConfiguration localToGlobal(ServiceConfigurationLocal serviceConfigurationLocalLocal, String serviceURL)
+//    {
+//        ServiceConfiguration serviceConfiguration = new ServiceConfiguration();
+//
+//        serviceConfiguration.setServiceID(serviceConfigurationLocalLocal.getServiceID());
+//        serviceConfiguration.setLogoImagePath(serviceConfigurationLocalLocal.getLogoImagePath());
+//        serviceConfiguration.setBackdropImagePath(serviceConfigurationLocalLocal.getBackdropImagePath());
+//
+//        serviceConfiguration.setServiceName(serviceConfigurationLocalLocal.getServiceName());
+//        serviceConfiguration.setHelplineNumber(serviceConfigurationLocalLocal.getHelplineNumber());
+//        serviceConfiguration.setDescriptionShort(serviceConfigurationLocalLocal.getDescriptionShort());
+//        serviceConfiguration.setDescriptionLong(serviceConfigurationLocalLocal.getDescriptionLong());
+//
+//        serviceConfiguration.setAddress(serviceConfigurationLocalLocal.getAddress());
+//        serviceConfiguration.setCity(serviceConfigurationLocalLocal.getCity());
+//        serviceConfiguration.setPincode(serviceConfigurationLocalLocal.getPincode());
+//        serviceConfiguration.setLandmark(serviceConfigurationLocalLocal.getLandmark());
+//        serviceConfiguration.setState(serviceConfigurationLocalLocal.getState());
+//        serviceConfiguration.setCountry(serviceConfigurationLocalLocal.getCountry());
+//
+//        serviceConfiguration.setISOCountryCode(serviceConfigurationLocalLocal.getISOCountryCode());
+//        serviceConfiguration.setISOLanguageCode(serviceConfigurationLocalLocal.getISOLanguageCode());
+//        serviceConfiguration.setISOCurrencyCode(serviceConfigurationLocalLocal.getISOCurrencyCode());
+//
+//        serviceConfiguration.setServiceType(serviceConfigurationLocalLocal.getServiceType());
+//
+//        serviceConfiguration.setLatCenter(serviceConfigurationLocalLocal.getLatCenter());
+//        serviceConfiguration.setLonCenter(serviceConfigurationLocalLocal.getLonCenter());
+//        serviceConfiguration.setServiceRange(serviceConfigurationLocalLocal.getServiceRange());
+//
+//        serviceConfiguration.setUpdated(serviceConfigurationLocalLocal.getUpdated());
+//        serviceConfiguration.setCreated(serviceConfigurationLocalLocal.getCreated());
+//
+//        serviceConfiguration.setServiceURL(serviceURL);
+//
+//        return serviceConfiguration;
+//    }
 
 
 

@@ -1,8 +1,7 @@
 package org.taxireferral.sds.ModelEndpoints;
 
 
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationGlobal;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationLocal;
+import org.taxireferral.sds.ModelSettings.ServiceConfiguration;
 
 import java.util.List;
 
@@ -15,16 +14,16 @@ public class ServiceConfigEndpoint {
     private int offset;
     private int limit;
     private int max_limit;
-    private List<ServiceConfigurationGlobal> results;
+    private List<ServiceConfiguration> results;
 
 
 
 
-    public List<ServiceConfigurationGlobal> getResults() {
+    public List<ServiceConfiguration> getResults() {
         return results;
     }
 
-    public void setResults(List<ServiceConfigurationGlobal> results) {
+    public void setResults(List<ServiceConfiguration> results) {
         this.results = results;
     }
 

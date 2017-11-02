@@ -3,8 +3,7 @@ package org.taxireferral.sds.DAOs;
 import com.zaxxer.hikari.HikariDataSource;
 import org.taxireferral.sds.Globals.Globals;
 import org.taxireferral.sds.ModelEndpoints.ServiceConfigEndpoint;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationGlobal;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationLocal;
+import org.taxireferral.sds.ModelSettings.ServiceConfiguration;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ServiceConfigurationDAO {
     private HikariDataSource dataSource = Globals.getDataSource();
 
 
-    public int insertServiceConfig(ServiceConfigurationGlobal serviceConfigurationGlobal)
+    public int insertServiceConfig(ServiceConfiguration serviceConfiguration)
     {
 
         Connection connection = null;
@@ -25,42 +24,42 @@ public class ServiceConfigurationDAO {
         int rowIdOfInsertedRow = -1;
 
         String insertShop = "INSERT INTO "
-                + ServiceConfigurationGlobal.TABLE_NAME
+                + ServiceConfiguration.TABLE_NAME
                 + "("
 
-                + ServiceConfigurationGlobal.LOGO_IMAGE_PATH + ","
-                + ServiceConfigurationGlobal.BACKDROP_IMAGE_PATH + ","
+                + ServiceConfiguration.LOGO_IMAGE_PATH + ","
+                + ServiceConfiguration.BACKDROP_IMAGE_PATH + ","
 
-                + ServiceConfigurationGlobal.SERVICE_NAME + ","
-                + ServiceConfigurationGlobal.HELPLINE_NUMBER + ","
+                + ServiceConfiguration.SERVICE_NAME + ","
+                + ServiceConfiguration.HELPLINE_NUMBER + ","
 
-                + ServiceConfigurationGlobal.DESCRIPTION_SHORT + ","
-                + ServiceConfigurationGlobal.DESCRIPTION_LONG + ","
+                + ServiceConfiguration.DESCRIPTION_SHORT + ","
+                + ServiceConfiguration.DESCRIPTION_LONG + ","
 
-                + ServiceConfigurationGlobal.ADDRESS + ","
-                + ServiceConfigurationGlobal.CITY + ","
-                + ServiceConfigurationGlobal.PINCODE + ","
-                + ServiceConfigurationGlobal.LANDMARK + ","
-                + ServiceConfigurationGlobal.STATE + ","
-                + ServiceConfigurationGlobal.COUNTRY + ","
+                + ServiceConfiguration.ADDRESS + ","
+                + ServiceConfiguration.CITY + ","
+                + ServiceConfiguration.PINCODE + ","
+                + ServiceConfiguration.LANDMARK + ","
+                + ServiceConfiguration.STATE + ","
+                + ServiceConfiguration.COUNTRY + ","
 
-                + ServiceConfigurationGlobal.ISO_COUNTRY_CODE + ","
-                + ServiceConfigurationGlobal.ISO_LANGUAGE_CODE + ","
-                + ServiceConfigurationGlobal.ISO_CURRENCY_CODE + ","
+                + ServiceConfiguration.ISO_COUNTRY_CODE + ","
+                + ServiceConfiguration.ISO_LANGUAGE_CODE + ","
+                + ServiceConfiguration.ISO_CURRENCY_CODE + ","
 
-                + ServiceConfigurationGlobal.SERVICE_TYPE + ","
+                + ServiceConfiguration.SERVICE_TYPE + ","
 
-                + ServiceConfigurationGlobal.LAT_CENTER + ","
-                + ServiceConfigurationGlobal.LON_CENTER + ","
+                + ServiceConfiguration.LAT_CENTER + ","
+                + ServiceConfiguration.LON_CENTER + ","
 
-                + ServiceConfigurationGlobal.SERVICE_RANGE + ","
+                + ServiceConfiguration.SERVICE_RANGE + ","
 
-                + ServiceConfigurationGlobal.IS_OFFICIAL_SERVICE_PROVIDER + ","
-                + ServiceConfigurationGlobal.IS_VERIFIED + ","
-                + ServiceConfigurationGlobal.SERVICE_URL + ","
+                + ServiceConfiguration.IS_OFFICIAL_SERVICE_PROVIDER + ","
+                + ServiceConfiguration.IS_VERIFIED + ","
+                + ServiceConfiguration.SERVICE_URL + ","
 
-                + ServiceConfigurationGlobal.CREATED + ","
-                + ServiceConfigurationGlobal.UPDATED + ""
+                + ServiceConfiguration.CREATED + ","
+                + ServiceConfiguration.UPDATED + ""
                 + " ) VALUES (?,? ,?,? ,?,? ,?,?,?,?,?,? ,?,?,?, ?, ?,?, ?, ?,?,? ,?,?)";
 
         try {
@@ -70,38 +69,38 @@ public class ServiceConfigurationDAO {
             statement = connection.prepareStatement(insertShop,PreparedStatement.RETURN_GENERATED_KEYS);
 
             int i = 0;
-            statement.setString(++i,serviceConfigurationGlobal.getLogoImagePath());
-            statement.setString(++i,serviceConfigurationGlobal.getBackdropImagePath());
-            statement.setString(++i,serviceConfigurationGlobal.getServiceName());
-            statement.setString(++i,serviceConfigurationGlobal.getHelplineNumber());
+            statement.setString(++i, serviceConfiguration.getLogoImagePath());
+            statement.setString(++i, serviceConfiguration.getBackdropImagePath());
+            statement.setString(++i, serviceConfiguration.getServiceName());
+            statement.setString(++i, serviceConfiguration.getHelplineNumber());
 
-            statement.setString(++i,serviceConfigurationGlobal.getDescriptionShort());
-            statement.setString(++i,serviceConfigurationGlobal.getDescriptionLong());
+            statement.setString(++i, serviceConfiguration.getDescriptionShort());
+            statement.setString(++i, serviceConfiguration.getDescriptionLong());
 
-            statement.setString(++i,serviceConfigurationGlobal.getAddress());
-            statement.setString(++i,serviceConfigurationGlobal.getCity());
-            statement.setObject(++i,serviceConfigurationGlobal.getPincode());
-            statement.setString(++i,serviceConfigurationGlobal.getLandmark());
-            statement.setString(++i,serviceConfigurationGlobal.getState());
-            statement.setString(++i,serviceConfigurationGlobal.getCountry());
+            statement.setString(++i, serviceConfiguration.getAddress());
+            statement.setString(++i, serviceConfiguration.getCity());
+            statement.setObject(++i, serviceConfiguration.getPincode());
+            statement.setString(++i, serviceConfiguration.getLandmark());
+            statement.setString(++i, serviceConfiguration.getState());
+            statement.setString(++i, serviceConfiguration.getCountry());
 
-            statement.setString(++i,serviceConfigurationGlobal.getISOCountryCode());
-            statement.setString(++i,serviceConfigurationGlobal.getISOLanguageCode());
-            statement.setString(++i,serviceConfigurationGlobal.getISOCurrencyCode());
+            statement.setString(++i, serviceConfiguration.getISOCountryCode());
+            statement.setString(++i, serviceConfiguration.getISOLanguageCode());
+            statement.setString(++i, serviceConfiguration.getISOCurrencyCode());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getServiceType());
+            statement.setObject(++i, serviceConfiguration.getServiceType());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getLatCenter());
-            statement.setObject(++i,serviceConfigurationGlobal.getLonCenter());
+            statement.setObject(++i, serviceConfiguration.getLatCenter());
+            statement.setObject(++i, serviceConfiguration.getLonCenter());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getServiceRange());
+            statement.setObject(++i, serviceConfiguration.getServiceRange());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getOfficial());
-            statement.setObject(++i,serviceConfigurationGlobal.getVerified());
-            statement.setString(++i,serviceConfigurationGlobal.getServiceURL());
+            statement.setObject(++i, serviceConfiguration.getOfficial());
+            statement.setObject(++i, serviceConfiguration.getVerified());
+            statement.setString(++i, serviceConfiguration.getServiceURL());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getCreated());
-            statement.setObject(++i,serviceConfigurationGlobal.getUpdated());
+            statement.setObject(++i, serviceConfiguration.getCreated());
+            statement.setObject(++i, serviceConfiguration.getUpdated());
 
             rowIdOfInsertedRow = statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
@@ -111,7 +110,7 @@ public class ServiceConfigurationDAO {
                 rowIdOfInsertedRow = rs.getInt(1);
             }
 
-            System.out.println("Key autogenerated ServiceConfigurationGlobal : " + rowIdOfInsertedRow);
+            System.out.println("Key autogenerated ServiceConfiguration : " + rowIdOfInsertedRow);
 
 
         } catch (SQLException e) {
@@ -148,48 +147,48 @@ public class ServiceConfigurationDAO {
 
 
 
-    public int updateServiceConfig(ServiceConfigurationGlobal serviceConfigurationGlobal)
+    public int updateServiceConfig(ServiceConfiguration serviceConfiguration)
     {
 
 
-        String updateStatement = "UPDATE " + ServiceConfigurationGlobal.TABLE_NAME
+        String updateStatement = "UPDATE " + ServiceConfiguration.TABLE_NAME
                 + " SET "
 
-                + ServiceConfigurationGlobal.LOGO_IMAGE_PATH + "= ?,"
-                + ServiceConfigurationGlobal.BACKDROP_IMAGE_PATH + "= ?,"
+                + ServiceConfiguration.LOGO_IMAGE_PATH + "= ?,"
+                + ServiceConfiguration.BACKDROP_IMAGE_PATH + "= ?,"
 
-                + ServiceConfigurationGlobal.SERVICE_NAME + "= ?,"
-                + ServiceConfigurationGlobal.HELPLINE_NUMBER + "= ?,"
+                + ServiceConfiguration.SERVICE_NAME + "= ?,"
+                + ServiceConfiguration.HELPLINE_NUMBER + "= ?,"
 
-                + ServiceConfigurationGlobal.DESCRIPTION_SHORT + "=?,"
-                + ServiceConfigurationGlobal.DESCRIPTION_LONG + "=?,"
+                + ServiceConfiguration.DESCRIPTION_SHORT + "=?,"
+                + ServiceConfiguration.DESCRIPTION_LONG + "=?,"
 
-                + ServiceConfigurationGlobal.ADDRESS + "=?,"
-                + ServiceConfigurationGlobal.CITY + "=?,"
-                + ServiceConfigurationGlobal.PINCODE + "=?,"
-                + ServiceConfigurationGlobal.LANDMARK + "=?,"
-                + ServiceConfigurationGlobal.STATE + "=?,"
-                + ServiceConfigurationGlobal.COUNTRY + "=?,"
+                + ServiceConfiguration.ADDRESS + "=?,"
+                + ServiceConfiguration.CITY + "=?,"
+                + ServiceConfiguration.PINCODE + "=?,"
+                + ServiceConfiguration.LANDMARK + "=?,"
+                + ServiceConfiguration.STATE + "=?,"
+                + ServiceConfiguration.COUNTRY + "=?,"
 
-                + ServiceConfigurationGlobal.ISO_COUNTRY_CODE + "=?,"
-                + ServiceConfigurationGlobal.ISO_LANGUAGE_CODE + "=?,"
-                + ServiceConfigurationGlobal.ISO_CURRENCY_CODE + "=?,"
+                + ServiceConfiguration.ISO_COUNTRY_CODE + "=?,"
+                + ServiceConfiguration.ISO_LANGUAGE_CODE + "=?,"
+                + ServiceConfiguration.ISO_CURRENCY_CODE + "=?,"
 
-                + ServiceConfigurationGlobal.SERVICE_TYPE + "=?,"
+                + ServiceConfiguration.SERVICE_TYPE + "=?,"
 
-                + ServiceConfigurationGlobal.LAT_CENTER + "=?,"
-                + ServiceConfigurationGlobal.LON_CENTER + "=?,"
+                + ServiceConfiguration.LAT_CENTER + "=?,"
+                + ServiceConfiguration.LON_CENTER + "=?,"
 
-                + ServiceConfigurationGlobal.SERVICE_RANGE + "=?,"
+                + ServiceConfiguration.SERVICE_RANGE + "=?,"
 
-//                + ServiceConfigurationGlobal.IS_OFFICIAL_SERVICE_PROVIDER + "=?,"
-//                + ServiceConfigurationGlobal.IS_VERIFIED + "=?,"
-//                + ServiceConfigurationGlobal.SERVICE_URL + "=?,"
+//                + ServiceConfiguration.IS_OFFICIAL_SERVICE_PROVIDER + "=?,"
+//                + ServiceConfiguration.IS_VERIFIED + "=?,"
+//                + ServiceConfiguration.SERVICE_URL + "=?,"
 
-                + ServiceConfigurationGlobal.CREATED + "=?,"
-                + ServiceConfigurationGlobal.UPDATED + "=?"
+                + ServiceConfiguration.CREATED + "=?,"
+                + ServiceConfiguration.UPDATED + "=?"
 
-                + " WHERE " + ServiceConfigurationGlobal.SERVICE_URL + " = ?";
+                + " WHERE " + ServiceConfiguration.SERVICE_URL + " = ?";
 
 
 
@@ -204,38 +203,38 @@ public class ServiceConfigurationDAO {
 
 
             int i = 0;
-            statement.setString(++i,serviceConfigurationGlobal.getLogoImagePath());
-            statement.setString(++i,serviceConfigurationGlobal.getBackdropImagePath());
-            statement.setString(++i,serviceConfigurationGlobal.getServiceName());
-            statement.setString(++i,serviceConfigurationGlobal.getHelplineNumber());
+            statement.setString(++i, serviceConfiguration.getLogoImagePath());
+            statement.setString(++i, serviceConfiguration.getBackdropImagePath());
+            statement.setString(++i, serviceConfiguration.getServiceName());
+            statement.setString(++i, serviceConfiguration.getHelplineNumber());
 
-            statement.setString(++i,serviceConfigurationGlobal.getDescriptionShort());
-            statement.setString(++i,serviceConfigurationGlobal.getDescriptionLong());
+            statement.setString(++i, serviceConfiguration.getDescriptionShort());
+            statement.setString(++i, serviceConfiguration.getDescriptionLong());
 
-            statement.setString(++i,serviceConfigurationGlobal.getAddress());
-            statement.setString(++i,serviceConfigurationGlobal.getCity());
-            statement.setObject(++i,serviceConfigurationGlobal.getPincode());
-            statement.setString(++i,serviceConfigurationGlobal.getLandmark());
-            statement.setString(++i,serviceConfigurationGlobal.getState());
-            statement.setString(++i,serviceConfigurationGlobal.getCountry());
+            statement.setString(++i, serviceConfiguration.getAddress());
+            statement.setString(++i, serviceConfiguration.getCity());
+            statement.setObject(++i, serviceConfiguration.getPincode());
+            statement.setString(++i, serviceConfiguration.getLandmark());
+            statement.setString(++i, serviceConfiguration.getState());
+            statement.setString(++i, serviceConfiguration.getCountry());
 
-            statement.setString(++i,serviceConfigurationGlobal.getISOCountryCode());
-            statement.setString(++i,serviceConfigurationGlobal.getISOLanguageCode());
-            statement.setString(++i,serviceConfigurationGlobal.getISOCurrencyCode());
+            statement.setString(++i, serviceConfiguration.getISOCountryCode());
+            statement.setString(++i, serviceConfiguration.getISOLanguageCode());
+            statement.setString(++i, serviceConfiguration.getISOCurrencyCode());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getServiceType());
+            statement.setObject(++i, serviceConfiguration.getServiceType());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getLatCenter());
-            statement.setObject(++i,serviceConfigurationGlobal.getLonCenter());
+            statement.setObject(++i, serviceConfiguration.getLatCenter());
+            statement.setObject(++i, serviceConfiguration.getLonCenter());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getServiceRange());
+            statement.setObject(++i, serviceConfiguration.getServiceRange());
 
-//            statement.setObject(++i,serviceConfigurationGlobal.getOfficial());
-//            statement.setObject(++i,serviceConfigurationGlobal.getVerified());
+//            statement.setObject(++i,serviceConfiguration.getOfficial());
+//            statement.setObject(++i,serviceConfiguration.getVerified());
 
-            statement.setObject(++i,serviceConfigurationGlobal.getCreated());
-            statement.setObject(++i,serviceConfigurationGlobal.getUpdated());
-            statement.setString(++i,serviceConfigurationGlobal.getServiceURL());
+            statement.setObject(++i, serviceConfiguration.getCreated());
+            statement.setObject(++i, serviceConfiguration.getUpdated());
+            statement.setString(++i, serviceConfiguration.getServiceURL());
 
             updatedRows = statement.executeUpdate();
 
@@ -279,15 +278,15 @@ public class ServiceConfigurationDAO {
 
 
 
-    public int updateServiceConfigByStaff(ServiceConfigurationGlobal serviceConfigurationGlobal)
+    public int updateServiceConfigByStaff(ServiceConfiguration serviceConfiguration)
     {
 
 
         String updateStatement =
-                        " UPDATE " + ServiceConfigurationGlobal.TABLE_NAME +
-                        " SET " + ServiceConfigurationGlobal.IS_OFFICIAL_SERVICE_PROVIDER + "=?,"
-                                + ServiceConfigurationGlobal.IS_VERIFIED + "=?"
-                        + " WHERE " + ServiceConfigurationGlobal.SERVICE_URL + " = ?";
+                        " UPDATE " + ServiceConfiguration.TABLE_NAME +
+                        " SET " + ServiceConfiguration.IS_OFFICIAL_SERVICE_PROVIDER + "=?,"
+                                + ServiceConfiguration.IS_VERIFIED + "=?"
+                        + " WHERE " + ServiceConfiguration.SERVICE_URL + " = ?";
 
 
         Connection connection = null;
@@ -301,9 +300,9 @@ public class ServiceConfigurationDAO {
 
 
             int i = 0;
-            statement.setObject(++i,serviceConfigurationGlobal.getOfficial());
-            statement.setObject(++i,serviceConfigurationGlobal.getVerified());
-            statement.setObject(++i,serviceConfigurationGlobal.getServiceURL());
+            statement.setObject(++i, serviceConfiguration.getOfficial());
+            statement.setObject(++i, serviceConfiguration.getVerified());
+            statement.setObject(++i, serviceConfiguration.getServiceURL());
             updatedRows = statement.executeUpdate();
 
 
@@ -348,8 +347,8 @@ public class ServiceConfigurationDAO {
     public int deleteServiceConfig(int serviceConfigurationID)
     {
 
-        String deleteStatement = "DELETE FROM " + ServiceConfigurationGlobal.TABLE_NAME
-                + " WHERE " + ServiceConfigurationGlobal.SERVICE_CONFIGURATION_ID + "= ?";
+        String deleteStatement = "DELETE FROM " + ServiceConfiguration.TABLE_NAME
+                + " WHERE " + ServiceConfiguration.SERVICE_CONFIGURATION_ID + "= ?";
 
 
         Connection connection= null;
@@ -421,47 +420,47 @@ public class ServiceConfigurationDAO {
 
         String queryNormal = "SELECT "
                 + "6371 * acos( cos( radians("
-                + latCenter + ")) * cos( radians( " + ServiceConfigurationGlobal.LAT_CENTER + ") ) * cos(radians( " + ServiceConfigurationGlobal.LON_CENTER + " ) - radians("
-                + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians( " + ServiceConfigurationGlobal.LAT_CENTER + " ))) as distance" + ","
+                + latCenter + ")) * cos( radians( " + ServiceConfiguration.LAT_CENTER + ") ) * cos(radians( " + ServiceConfiguration.LON_CENTER + " ) - radians("
+                + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians( " + ServiceConfiguration.LAT_CENTER + " ))) as distance" + ","
 
                 + "count(*) over() AS full_count " + ","
 
-                + ServiceConfigurationGlobal.SERVICE_CONFIGURATION_ID + ","
-                + ServiceConfigurationGlobal.LOGO_IMAGE_PATH + ","
-                + ServiceConfigurationGlobal.BACKDROP_IMAGE_PATH + ","
+                + ServiceConfiguration.SERVICE_CONFIGURATION_ID + ","
+                + ServiceConfiguration.LOGO_IMAGE_PATH + ","
+                + ServiceConfiguration.BACKDROP_IMAGE_PATH + ","
 
-                + ServiceConfigurationGlobal.SERVICE_NAME + ","
-                + ServiceConfigurationGlobal.HELPLINE_NUMBER + ","
+                + ServiceConfiguration.SERVICE_NAME + ","
+                + ServiceConfiguration.HELPLINE_NUMBER + ","
 
-                + ServiceConfigurationGlobal.DESCRIPTION_SHORT + ","
-                + ServiceConfigurationGlobal.DESCRIPTION_LONG + ","
+                + ServiceConfiguration.DESCRIPTION_SHORT + ","
+                + ServiceConfiguration.DESCRIPTION_LONG + ","
 
-                + ServiceConfigurationGlobal.ADDRESS + ","
-                + ServiceConfigurationGlobal.CITY + ","
-                + ServiceConfigurationGlobal.PINCODE + ","
-                + ServiceConfigurationGlobal.LANDMARK + ","
-                + ServiceConfigurationGlobal.STATE + ","
-                + ServiceConfigurationGlobal.COUNTRY + ","
+                + ServiceConfiguration.ADDRESS + ","
+                + ServiceConfiguration.CITY + ","
+                + ServiceConfiguration.PINCODE + ","
+                + ServiceConfiguration.LANDMARK + ","
+                + ServiceConfiguration.STATE + ","
+                + ServiceConfiguration.COUNTRY + ","
 
-                + ServiceConfigurationGlobal.ISO_COUNTRY_CODE + ","
-                + ServiceConfigurationGlobal.ISO_LANGUAGE_CODE + ","
-                + ServiceConfigurationGlobal.ISO_CURRENCY_CODE + ","
+                + ServiceConfiguration.ISO_COUNTRY_CODE + ","
+                + ServiceConfiguration.ISO_LANGUAGE_CODE + ","
+                + ServiceConfiguration.ISO_CURRENCY_CODE + ","
 
-                + ServiceConfigurationGlobal.SERVICE_TYPE + ","
+                + ServiceConfiguration.SERVICE_TYPE + ","
 
-                + ServiceConfigurationGlobal.LAT_CENTER + ","
-                + ServiceConfigurationGlobal.LON_CENTER + ","
+                + ServiceConfiguration.LAT_CENTER + ","
+                + ServiceConfiguration.LON_CENTER + ","
 
-                + ServiceConfigurationGlobal.SERVICE_RANGE + ","
+                + ServiceConfiguration.SERVICE_RANGE + ","
 
-//                + ServiceConfigurationGlobal.IS_OFFICIAL_SERVICE_PROVIDER + ","
-//                + ServiceConfigurationGlobal.IS_VERIFIED + ","
-                + ServiceConfigurationGlobal.SERVICE_URL + ","
+//                + ServiceConfiguration.IS_OFFICIAL_SERVICE_PROVIDER + ","
+//                + ServiceConfiguration.IS_VERIFIED + ","
+                + ServiceConfiguration.SERVICE_URL + ","
 
-                + ServiceConfigurationGlobal.CREATED + ","
-                + ServiceConfigurationGlobal.UPDATED + ""
+                + ServiceConfiguration.CREATED + ","
+                + ServiceConfiguration.UPDATED + ""
 
-                + " FROM " + ServiceConfigurationGlobal.TABLE_NAME;
+                + " FROM " + ServiceConfiguration.TABLE_NAME;
 
 
 
@@ -478,8 +477,8 @@ public class ServiceConfigurationDAO {
 
             queryPartlatLonCenter = queryPartlatLonCenter
                     + "6371 * acos( cos( radians("
-                    + latCenter + ")) * cos( radians( " + ServiceConfigurationGlobal.LAT_CENTER + ") ) * cos(radians( " + ServiceConfigurationGlobal.LON_CENTER + " ) - radians("
-                    + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians( " + ServiceConfigurationGlobal.LAT_CENTER + " ))) <= " + ServiceConfigurationGlobal.SERVICE_RANGE;
+                    + latCenter + ")) * cos( radians( " + ServiceConfiguration.LAT_CENTER + ") ) * cos(radians( " + ServiceConfiguration.LON_CENTER + " ) - radians("
+                    + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians( " + ServiceConfiguration.LAT_CENTER + " ))) <= " + ServiceConfiguration.SERVICE_RANGE;
 
             queryNormal = queryNormal + queryPartlatLonCenter;
 
@@ -498,9 +497,9 @@ public class ServiceConfigurationDAO {
 //
 //            // filter using Haversine formula using SQL math functions
 //            queryPartProximity = queryPartProximity
-//                    + " (6371.01 * acos(cos( radians(" + latCenter + ")) * cos( radians(" + ServiceConfigurationGlobal.LAT_CENTER + " )) * cos(radians( "
-//                    + ServiceConfigurationGlobal.LON_CENTER + ") - radians(" + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians("
-//                    + ServiceConfigurationGlobal.LAT_CENTER + ")))) <= " + proximity ;
+//                    + " (6371.01 * acos(cos( radians(" + latCenter + ")) * cos( radians(" + ServiceConfiguration.LAT_CENTER + " )) * cos(radians( "
+//                    + ServiceConfiguration.LON_CENTER + ") - radians(" + lonCenter + "))" + " + sin( radians(" + latCenter + ")) * sin(radians("
+//                    + ServiceConfiguration.LAT_CENTER + ")))) <= " + proximity ;
 //
 //
 //            if(isFirst)
@@ -522,7 +521,7 @@ public class ServiceConfigurationDAO {
         {
             String queryPartOfficial = "";
 
-            queryPartOfficial = queryPartOfficial + ServiceConfigurationGlobal.TABLE_NAME + "." + ServiceConfigurationGlobal.IS_OFFICIAL_SERVICE_PROVIDER + " = " + isOfficial;
+            queryPartOfficial = queryPartOfficial + ServiceConfiguration.TABLE_NAME + "." + ServiceConfiguration.IS_OFFICIAL_SERVICE_PROVIDER + " = " + isOfficial;
 
             if(isFirst)
             {
@@ -543,7 +542,7 @@ public class ServiceConfigurationDAO {
         {
             String queryPartVerified = "";
 
-            queryPartVerified = queryPartVerified + ServiceConfigurationGlobal.TABLE_NAME + "." + ServiceConfigurationGlobal.IS_VERIFIED + " = " + isVerified;
+            queryPartVerified = queryPartVerified + ServiceConfiguration.TABLE_NAME + "." + ServiceConfiguration.IS_VERIFIED + " = " + isVerified;
 
             if(isFirst)
             {
@@ -564,7 +563,7 @@ public class ServiceConfigurationDAO {
         {
             String queryPartServiceType = "";
 
-            queryPartServiceType = queryPartServiceType + ServiceConfigurationGlobal.TABLE_NAME + "." + ServiceConfigurationGlobal.SERVICE_TYPE + " = " + serviceType;
+            queryPartServiceType = queryPartServiceType + ServiceConfiguration.TABLE_NAME + "." + ServiceConfiguration.SERVICE_TYPE + " = " + serviceType;
 
             if(isFirst)
             {
@@ -583,9 +582,9 @@ public class ServiceConfigurationDAO {
 
         if(searchString !=null)
         {
-            String queryPartSearch = "(" + ServiceConfigurationGlobal.TABLE_NAME + "." + ServiceConfigurationGlobal.SERVICE_NAME +" ilike '%" + searchString + "%'"
-                    + " or " + ServiceConfigurationGlobal.TABLE_NAME + "." + ServiceConfigurationGlobal.ADDRESS + " ilike '%" + searchString + "%'"
-                    + " or " + ServiceConfigurationGlobal.TABLE_NAME + "." + ServiceConfigurationGlobal.CITY + " ilike '%" + searchString + "%' )";
+            String queryPartSearch = "(" + ServiceConfiguration.TABLE_NAME + "." + ServiceConfiguration.SERVICE_NAME +" ilike '%" + searchString + "%'"
+                    + " or " + ServiceConfiguration.TABLE_NAME + "." + ServiceConfiguration.ADDRESS + " ilike '%" + searchString + "%'"
+                    + " or " + ServiceConfiguration.TABLE_NAME + "." + ServiceConfiguration.CITY + " ilike '%" + searchString + "%' )";
 
 
 
@@ -608,7 +607,7 @@ public class ServiceConfigurationDAO {
 
         if(serviceURL !=null)
         {
-            String serviceURLquery = "(" + ServiceConfigurationGlobal.TABLE_NAME + "." + ServiceConfigurationGlobal.SERVICE_URL + " = " + serviceURL + " )";
+            String serviceURLquery = "(" + ServiceConfiguration.TABLE_NAME + "." + ServiceConfiguration.SERVICE_URL + " = " + serviceURL + " )";
 
 
             if(isFirst)
@@ -682,7 +681,7 @@ public class ServiceConfigurationDAO {
         ServiceConfigEndpoint endPoint = new ServiceConfigEndpoint();
         endPoint.setItemCount(0);
 
-        ArrayList<ServiceConfigurationGlobal> shopList = new ArrayList<>();
+        ArrayList<ServiceConfiguration> shopList = new ArrayList<>();
 
 
         Connection connection = null;
@@ -702,43 +701,43 @@ public class ServiceConfigurationDAO {
             while(rs.next())
             {
 
-                ServiceConfigurationGlobal sc = new ServiceConfigurationGlobal();
+                ServiceConfiguration sc = new ServiceConfiguration();
 
                 sc.setRt_distance(rs.getDouble("distance"));
 
-                sc.setServiceID(rs.getInt(ServiceConfigurationGlobal.SERVICE_CONFIGURATION_ID));
-                sc.setLogoImagePath(rs.getString(ServiceConfigurationGlobal.LOGO_IMAGE_PATH));
-                sc.setBackdropImagePath(rs.getString(ServiceConfigurationGlobal.BACKDROP_IMAGE_PATH));
-                sc.setServiceName(rs.getString(ServiceConfigurationGlobal.SERVICE_NAME));
-                sc.setHelplineNumber(rs.getString(ServiceConfigurationGlobal.HELPLINE_NUMBER));
+                sc.setServiceID(rs.getInt(ServiceConfiguration.SERVICE_CONFIGURATION_ID));
+                sc.setLogoImagePath(rs.getString(ServiceConfiguration.LOGO_IMAGE_PATH));
+                sc.setBackdropImagePath(rs.getString(ServiceConfiguration.BACKDROP_IMAGE_PATH));
+                sc.setServiceName(rs.getString(ServiceConfiguration.SERVICE_NAME));
+                sc.setHelplineNumber(rs.getString(ServiceConfiguration.HELPLINE_NUMBER));
 
-                sc.setDescriptionShort(rs.getString(ServiceConfigurationGlobal.DESCRIPTION_SHORT));
-                sc.setDescriptionLong(rs.getString(ServiceConfigurationGlobal.DESCRIPTION_LONG));
+                sc.setDescriptionShort(rs.getString(ServiceConfiguration.DESCRIPTION_SHORT));
+                sc.setDescriptionLong(rs.getString(ServiceConfiguration.DESCRIPTION_LONG));
 
-                sc.setAddress(rs.getString(ServiceConfigurationGlobal.ADDRESS));
-                sc.setCity(rs.getString(ServiceConfigurationGlobal.CITY));
-                sc.setPincode(rs.getLong(ServiceConfigurationGlobal.PINCODE));
-                sc.setLandmark(rs.getString(ServiceConfigurationGlobal.LANDMARK));
-                sc.setState(rs.getString(ServiceConfigurationGlobal.STATE));
-                sc.setCountry(rs.getString(ServiceConfigurationGlobal.COUNTRY));
+                sc.setAddress(rs.getString(ServiceConfiguration.ADDRESS));
+                sc.setCity(rs.getString(ServiceConfiguration.CITY));
+                sc.setPincode(rs.getLong(ServiceConfiguration.PINCODE));
+                sc.setLandmark(rs.getString(ServiceConfiguration.LANDMARK));
+                sc.setState(rs.getString(ServiceConfiguration.STATE));
+                sc.setCountry(rs.getString(ServiceConfiguration.COUNTRY));
 
-                sc.setISOCountryCode(rs.getString(ServiceConfigurationGlobal.ISO_COUNTRY_CODE));
-                sc.setISOLanguageCode(rs.getString(ServiceConfigurationGlobal.ISO_LANGUAGE_CODE));
-                sc.setISOCurrencyCode(rs.getString(ServiceConfigurationGlobal.ISO_CURRENCY_CODE));
+                sc.setISOCountryCode(rs.getString(ServiceConfiguration.ISO_COUNTRY_CODE));
+                sc.setISOLanguageCode(rs.getString(ServiceConfiguration.ISO_LANGUAGE_CODE));
+                sc.setISOCurrencyCode(rs.getString(ServiceConfiguration.ISO_CURRENCY_CODE));
 
-                sc.setServiceType(rs.getInt(ServiceConfigurationGlobal.SERVICE_TYPE));
+                sc.setServiceType(rs.getInt(ServiceConfiguration.SERVICE_TYPE));
 
-                sc.setLatCenter(rs.getDouble(ServiceConfigurationGlobal.LAT_CENTER));
-                sc.setLonCenter(rs.getDouble(ServiceConfigurationGlobal.LON_CENTER));
+                sc.setLatCenter(rs.getDouble(ServiceConfiguration.LAT_CENTER));
+                sc.setLonCenter(rs.getDouble(ServiceConfiguration.LON_CENTER));
 
-                sc.setServiceRange(rs.getInt(ServiceConfigurationGlobal.SERVICE_RANGE));
+                sc.setServiceRange(rs.getInt(ServiceConfiguration.SERVICE_RANGE));
 
-//                sc.setOfficial(rs.getBoolean(ServiceConfigurationGlobal.IS_OFFICIAL_SERVICE_PROVIDER));
-//                sc.setVerified(rs.getBoolean(ServiceConfigurationGlobal.IS_VERIFIED));
-                sc.setServiceURL(rs.getString(ServiceConfigurationGlobal.SERVICE_URL));
+//                sc.setOfficial(rs.getBoolean(ServiceConfiguration.IS_OFFICIAL_SERVICE_PROVIDER));
+//                sc.setVerified(rs.getBoolean(ServiceConfiguration.IS_VERIFIED));
+                sc.setServiceURL(rs.getString(ServiceConfiguration.SERVICE_URL));
 
-                sc.setCreated(rs.getTimestamp(ServiceConfigurationGlobal.CREATED));
-                sc.setUpdated(rs.getTimestamp(ServiceConfigurationGlobal.UPDATED));
+                sc.setCreated(rs.getTimestamp(ServiceConfiguration.CREATED));
+                sc.setUpdated(rs.getTimestamp(ServiceConfiguration.UPDATED));
 
                 endPoint.setItemCount(rs.getInt("full_count"));
                 shopList.add(sc);

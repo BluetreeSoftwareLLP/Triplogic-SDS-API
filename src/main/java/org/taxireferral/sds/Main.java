@@ -5,7 +5,7 @@ import org.glassfish.jersey.jetty.JettyHttpContainerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.taxireferral.sds.Globals.Globals;
 import org.taxireferral.sds.ModelRoles.User;
-import org.taxireferral.sds.ModelSettings.ServiceConfigurationGlobal;
+import org.taxireferral.sds.ModelSettings.ServiceConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -134,7 +134,7 @@ public class Main {
             statement = connection.createStatement();
 
             statement.executeUpdate(User.createTablePostgres);
-            statement.executeUpdate(ServiceConfigurationGlobal.createTablePostgres);
+            statement.executeUpdate(ServiceConfiguration.createTablePostgres);
 
             System.out.println("Tables Created ... !");
 
